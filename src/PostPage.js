@@ -1,10 +1,20 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 
-const PostPage = ({ posts, handleDelete }) => {
+import { useStoreState, useStoreActions } from "easy-peasy";
+
+const PostPage = () => {
     const { id } = useParams();
-    const post = posts.find((post) => post.id.toString() === id);
-    console.log(post);
+    const history = useHistory();
+
+    const deletePost = useStoreActions((actions) => actions.deletePost);
+    const getPostById = useStoreState((state) => state.getPostById);
+    const post = getPostById(id);
+
+    const handleDelete = async (id) => {
+        deletePost(id);
+        history.push("/");
+    };
 
     return (
         <main className="PostPage">

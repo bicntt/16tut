@@ -1,7 +1,10 @@
 import React from "react";
 import Feed from "./Feed";
+import { useStoreState } from "easy-peasy";
 
-const Home = ({ posts, isLoading, fetchError }) => {
+const Home = ({ isLoading, fetchError }) => {
+    const { searchResults } = useStoreState((state) => state.searchResults);
+    console.log(searchResults);
     console.log("Home page");
     return (
         <main className="Home">
@@ -13,8 +16,8 @@ const Home = ({ posts, isLoading, fetchError }) => {
             )}
             {!isLoading &&
                 !fetchError &&
-                (posts.length ? (
-                    <Feed posts={posts} />
+                (searchResults.length ? (
+                    <Feed posts={searchResults} />
                 ) : (
                     <p>No posts to display.</p>
                 ))}

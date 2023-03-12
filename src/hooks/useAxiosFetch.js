@@ -82,7 +82,7 @@ const useAxiosFetch = (dataUrl) => {
         fetchData(dataUrl);
 
         const cleanUp = () => {
-            console.log(" Cleanup...axios");
+            console.log("  Cleanup...axios");
             isMounted = false;
             source.cancel();
         };
@@ -94,3 +94,33 @@ const useAxiosFetch = (dataUrl) => {
 };
 
 export default useAxiosFetch;
+
+// import { useState, useEffect, useCallback } from "react";
+// import axios from "axios";
+
+// const useAxiosFetch = (url) => {
+//     const [data, setData] = useState([]);
+//     const [isLoading, setIsLoading] = useState(true);
+//     const [error, setError] = useState(null);
+//     console.log("useAxiosFetch - outside useEffect");
+
+//     const fetchData = useCallback(() => {
+//         console.log("useAxiosFetch - inside useCallback");
+//         axios
+//             .get(url)
+//             .then((response) => {
+//                 setData(response.data);
+//                 setIsLoading(false);
+//             })
+//             .catch((error) => setError(error));
+//     }, [url]);
+
+//     useEffect(() => {
+//         console.log("useAxiosFetch - inside useEffect");
+//         fetchData();
+//     }, [fetchData]);
+
+//     return [data, isLoading, error];
+// };
+
+// export default useAxiosFetch;
